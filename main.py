@@ -15,7 +15,7 @@ def readframe(path,  skiprows=0):
     return frame
 
 
-def decline_leg_years(n):
+def decline_years(n):
     if n % 100 == 1:
         return 'год'
     if n % 10 == 1 and n % 100 != 11:
@@ -29,12 +29,11 @@ def decline_leg_years(n):
 if __name__ == '__main__':
     year_foundation = 1920
     age = datetime.datetime.now().year
-
+    age = age-year_foundation
     wines = readframe('wine.xlsx')
     categories = wines['Категория'].unique()
-    print(categories)
     context = {
-        'year': age-year_foundation,
+        'year': f'{age} {decline_years(age)}',
         'wines': wines
     }
 
