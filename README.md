@@ -30,7 +30,7 @@ pip install -r requirements.txt
 
 Пример запуска программы
 ```
-python.exe .\main.py -f 'wine.xlsx
+python.exe .\main.py -f wine.xlsx
 ```
 При спользовании значений **IP/port**  по умолчанию перейдите на сайт по адресу [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
