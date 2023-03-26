@@ -1,5 +1,6 @@
 import datetime
 import pandas as pd
+import argparse
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader
 
@@ -26,12 +27,24 @@ def decline_years(n):
         return 'лет'
 
 
+def create_parser():
+    parser = argparse.ArgumentParser(
+        description='Site content managment'
+    )
+    parser.add_argument('-f', '--file', help='Путь к exel таблице с данными о товаре', default='wine.xlsx')
+    parser.add_argument('-i', '--ip', help='IP сервера', default='0.0.0.0')
+    parser.add_argument('-p', '--port', help='порт сервера', default=8000)
+    return parser
+
+
 if __name__ == '__main__':
     year_foundation = 1920
     age = datetime.datetime.now().year
     age = age-year_foundation
-    wines = readframe('wine.xlsx')
-    categories = wines['Категория'].unique()
+    parser = create_parser()
+    args = parser.parse_args()
+    wines = readframe(args.file)
+
     context = {
         'year': f'{age} {decline_years(age)}',
         'wines': wines
@@ -41,5 +54,5 @@ if __name__ == '__main__':
     with open('index.html', mode='w',  encoding='utf-8') as result:
         result.write(index_template.render(context))
 
-    server = HTTPServer(('0.0.0.0', 8000), SimpleHTTPRequestHandler)
+    server = HTTPServer((args.ip, args.port), SimpleHTTPRequestHandler)
     server.serve_forever()

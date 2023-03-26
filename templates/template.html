@@ -100,8 +100,6 @@
         </div>
       </div>
     </div>
-    
-    
     <div><a id="products"></a></div>
     <div class="site-section">
       <div class="container">
@@ -112,38 +110,34 @@
             </p>
           </div>
         </div>
-
-      {% for category in wines['Категория'].unique() %}
-        <div class="row">
-          <div class="col-12 section-title text-center mb-5">
-            <h2 class="d-block">{{ category }}</h2>
-          </div>
-        </div>
-        <div class="row">
-
-          {% for index, row in wines[wines['Категория'] == category].iterrows() %}
-        <div class="col-lg-4 mb-5 col-md-6">
-          <div class="wine_v_1 text-center pb-4 pt-5">
-            <img src="images/{{ row['Картинка'] }}" alt="Image" class="img-fluid">
-            {% if row['Акция'] %}
-            <img src="assets/profitable.png" style="width:10rem;height: 10rem;position:absolute;right: -20px;top: -20px;">
-            {% endif %}
-            <div>
-              <h3 class="heading mt-3 mb-3 text-dark">{{ row['Название'] }}</h3>
-              <p>
-                {% if row['Сорт'] %}
-                  Сорт винограда - {{ row['Сорт'] }}<br/>
-                {% endif %}
-                  <span class="price">{{ row['Цена'] }} р.</span>
-              </p>
+        {% for category in wines['Категория'].unique() %}
+          <div class="row">
+            <div class="col-12 section-title text-center mb-5">
+              <h2 class="d-block">{{ category }}</h2>
             </div>
           </div>
-        </div>
+          <div class="row">
+            {% for index, row in wines[wines['Категория'] == category].iterrows() %}
+              <div class="col-lg-4 mb-5 col-md-6">
+                <div class="wine_v_1 text-center pb-4 pt-5">
+                  <img src="images/{{ row['Картинка'] }}" alt="Image" class="img-fluid">
+                  {% if row['Акция'] %}
+                    <img src="assets/profitable.png" style="width:10rem;height: 10rem;position:absolute;right: -20px;top: -20px;">
+                  {% endif %}
+                  <div>
+                    <h3 class="heading mt-3 mb-3 text-dark">{{ row['Название'] }}</h3>
+                    <p>
+                      {% if row['Сорт'] %}
+                        Сорт винограда - {{ row['Сорт'] }}<br/>
+                      {% endif %}
+                      <span class="price">{{ row['Цена'] }} р.</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
         {% endfor %}
-
-        </div>
-      {% endfor %}
-
       </div>
     </div>
 
