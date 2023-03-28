@@ -29,9 +29,9 @@ def decline_years(n):
 
 def create_parser():
     parser = argparse.ArgumentParser(
-        description='Site content managment'
+        description='Site content management'
     )
-    parser.add_argument('-f', '--file', help='Путь к exel таблице с данными о товаре', default='wine.xlsx')
+    parser.add_argument('file', help='Путь к exel таблице с данными о товаре')
     parser.add_argument('-i', '--ip', help='IP сервера', default='0.0.0.0')
     parser.add_argument('-p', '--port', help='порт сервера', default=8000)
     return parser
